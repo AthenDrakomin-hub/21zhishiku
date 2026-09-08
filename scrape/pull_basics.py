@@ -12,10 +12,8 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 
 def fetch_basic_strategy():
     """拉取并整理基本策略表数据"""
-    # S17 和 H17 两套策略
     strategies = {}
     
-    # 从本地CSV文件读取策略
     for filename in ["basic_strategy_s17.csv", "basic_strategy_h17.csv"]:
         filepath = DATA_DIR / filename
         if filepath.exists():
@@ -61,7 +59,7 @@ def generate_strategy_summary():
         "statistics": {
             "strategy_tables": 2,
             "counting_systems": 9,
-            "projects_indexed": 7
+            "projects_indexed": 45
         }
     }
     return summary
@@ -72,7 +70,6 @@ def main():
     
     print("🃏 21点知识库数据整理中...")
     
-    # 拉取各项数据
     strategies = fetch_basic_strategy()
     rules = fetch_rules()
     counting = fetch_counting_systems()
@@ -84,7 +81,6 @@ def main():
     print(f"✓ 算牌系统: {len(counting) if counting else 0} 种")
     print(f"✓ 项目索引: {len(projects.get('projects', [])) if projects else 0} 个")
     
-    # 保存摘要
     summary_path = DATA_DIR / "summary.json"
     with open(summary_path, 'w', encoding='utf-8') as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)

@@ -17,15 +17,12 @@ source venv/bin/activate
 
 # 安装依赖
 echo "📥 安装依赖..."
-pip install -q fastapi uvicorn httpx
+pip install -r requirements.txt
 
 # 拉取数据
 echo "🔄 拉取种子数据..."
 python3 scrape/pull_basics.py
-python3 scrape/calculate_probabilities.py
 
 # 启动服务
 echo "🚀 启动API服务..."
-echo "API地址: http://localhost:8000"
-echo ""
 python3 api/server.py
