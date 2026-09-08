@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 """
-21点知识库查询API - 纯Python实现(无需FastAPI)
+21点知识库查询API - SQLite版
 提供RESTful接口查询知识库
 """
 
 import json
-import os
+import sqlite3
 from pathlib import Path
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
+DB_PATH = Path(__file__).parent / "knowledge_base.db"
+
 class KnowledgeBaseHandler(BaseHTTPRequestHandler):
     """HTTP请求处理器"""
     
-    DATA_DIR = Path(__file__).parent.parent / "data"
-    data_store = {}
+    def get_conn(self):
+        """获取数据库连接"""
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        return conn
     
     def do_GET(self):
         """处理GET请求"""
@@ -22,18 +27,16 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
         path = parsed.path
         params = parse_qs(parsed.query)
         
-        # 设置响应头
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         
-        # 路由分发
         try:
             if path == '/':
                 response = self.get_root()
             elif path == '/health':
-                response = {"status": "ok", "data_loaded": bool(self.data_store)}
+                response = {"status": "ok", "db_exists": DB_PATH.exists()}
             elif path == '/rules':
                 response = self.get_rules()
             elif path.startswith('/strategy'):
@@ -65,18 +68,19 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
         except Exception as e:
             response = {"error": str(e)}
         
-        self.wfile.write(json.dumps(response, ensure_ascii=False, indent=2).encode())
+        self.wfile.write(json.dumps(dict(response), ensure_ascii=False, indent=2).encode())
     
     def get_root(self):
         return {
-            "service": "21点知识库 API",
-            "version": "1.0.0",
+            "service": "21点知识库 API (SQLite版)",
+            "version": "2.0.0",
+            "database": str(DB_PATH),
             "endpoints": [
                 "/rules - 游戏规则和术语",
                 "/strategy?variant=s17 - 基本策略表",
                 "/counting-systems - 算牌系统",
-                "/projects - 开源项目索引",
-                "/search?q=关键词 - 全局搜索",
+                "/projects - 45个开源项目索引",
+                "/search?q=关键词 - 全文搜索",
                 "/stats - 数据统计",
                 "/probabilities - 概率数据",
                 "/history - 历史资料",
@@ -85,172 +89,148 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
         }
     
     def get_rules(self):
-        rules_path = self.DATA_DIR / "rules.json"
-        if rules_path.exists():
-            with open(rules_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "规则数据未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM rules ORDER BY category, name")
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "rules": rows}
     
     def get_strategy(self, variant):
-        strategy_path = self.DATA_DIR / f"basic_strategy_{variant}.csv"
-        if not strategy_path.exists():
-            return {"error": f"策略表 {variant} 未找到"}
-        
-        with open(strategy_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # 解析CSV
-        lines = content.strip().split('\n')
-        table = []
-        for line in lines:
-            if line.startswith('#') or not line.strip():
-                continue
-            parts = line.split(',')
-            if len(parts) >= 2:
-                entry = {"hand": parts[0].strip()}
-                for i, card in enumerate(['2', '3', '4', '5', '6', '7', '8', '9', '10', 'A']):
-                    if i + 1 < len(parts):
-                        entry[card] = parts[i + 1].strip()
-                table.append(entry)
-        
-        return {
-            "variant": variant,
-            "data": content,
-            "table": table
-        }
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT variant, hand, dealer_card, action, action_type 
+            FROM strategy 
+            WHERE variant = ?
+            ORDER BY 
+                CASE hand 
+                    WHEN '17' THEN 1 WHEN '16' THEN 2 WHEN '15' THEN 3 
+                    WHEN '14' THEN 4 WHEN '13' THEN 5 WHEN '12' THEN 6
+                    WHEN '11' THEN 7 WHEN '10' THEN 8 WHEN '9' THEN 9
+                    WHEN '8' THEN 10 ELSE 11
+                END,
+                dealer_card
+        """, (variant,))
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"variant": variant, "total": len(rows), "strategy": rows}
     
     def get_counting_systems(self):
-        systems_path = self.DATA_DIR / "card_counting_systems.json"
-        if systems_path.exists():
-            with open(systems_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "算牌系统数据未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM counting_systems ORDER BY name")
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "systems": rows}
     
     def get_counting_system(self, name):
-        systems_path = self.DATA_DIR / "card_counting_systems.json"
-        if systems_path.exists():
-            with open(systems_path, 'r', encoding='utf-8') as f:
-                systems = json.load(f)
-            for system in systems:
-                if system['name'].lower() == name.lower():
-                    return system
-        return {"error": f"算牌系统 {name} 未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM counting_systems WHERE name = ?", (name,))
+        row = cur.fetchone()
+        conn.close()
+        return dict(row) if row else {"error": f"算牌系统 {name} 未找到"}
     
     def get_projects(self):
-        projects_path = self.DATA_DIR / "projects.json"
-        if projects_path.exists():
-            with open(projects_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "项目索引未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("""
+            SELECT * FROM projects 
+            ORDER BY stars DESC, name ASC
+        """)
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "projects": rows}
     
     def get_project(self, name):
-        projects_path = self.DATA_DIR / "projects.json"
-        if projects_path.exists():
-            with open(projects_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            for project in data.get('projects', []):
-                if project['name'].lower() == name.lower():
-                    return project
-        return {"error": f"项目 {name} 未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM projects WHERE name = ?", (name,))
+        row = cur.fetchone()
+        conn.close()
+        return dict(row) if row else {"error": f"项目 {name} 未找到"}
     
     def search(self, query):
-        results = {"rules": [], "strategies": [], "systems": [], "projects": [], "history": []}
-        q = query.lower()
+        conn = self.get_conn()
+        cur = conn.cursor()
         
-        # 搜索规则
-        rules_path = self.DATA_DIR / "rules.json"
-        if rules_path.exists():
-            with open(rules_path, 'r', encoding='utf-8') as f:
-                rules = json.load(f)
-            for term in rules.get('terms', []):
-                if q in term['en'].lower() or q in term['zh'].lower() or q in term['desc'].lower():
-                    results['rules'].append(term)
+        results = {"rules": [], "projects": [], "systems": [], "total": 0}
         
-        # 搜索算牌系统
-        systems_path = self.DATA_DIR / "card_counting_systems.json"
-        if systems_path.exists():
-            with open(systems_path, 'r', encoding='utf-8') as f:
-                systems = json.load(f)
-            for system in systems:
-                if q in system['name'].lower() or q in system['description'].lower():
-                    results['systems'].append(system)
+        # 各表搜索
+        cur.execute("SELECT * FROM rules WHERE name LIKE ? OR description LIKE ?", 
+                   (f'%{query}%', f'%{query}%'))
+        results['rules'] = [dict(r) for r in cur.fetchall()]
         
-        # 搜索项目
-        projects_path = self.DATA_DIR / "projects.json"
-        if projects_path.exists():
-            with open(projects_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            for project in data.get('projects', []):
-                if (q in project['name'].lower() or 
-                    q in project['description'].lower() or
-                    any(q in tag.lower() for tag in project.get('tags', []))):
-                    results['projects'].append(project)
+        cur.execute("SELECT * FROM projects WHERE name LIKE ? OR description LIKE ?",
+                   (f'%{query}%', f'%{query}%'))
+        results['projects'] = [dict(r) for r in cur.fetchall()]
         
-        # 搜索历史
-        history_path = self.DATA_DIR / "history.json"
-        if history_path.exists():
-            with open(history_path, 'r', encoding='utf-8') as f:
-                history = json.load(f)
-            if q in json.dumps(history, ensure_ascii=False).lower():
-                results['history'].append(history)
+        cur.execute("SELECT * FROM counting_systems WHERE name LIKE ? OR description LIKE ?",
+                   (f'%{query}%', f'%{query}%'))
+        results['systems'] = [dict(r) for r in cur.fetchall()]
         
-        return {
-            "query": query,
-            "results": results,
-            "total": sum(len(v) for v in results.values())
-        }
+        results['total'] = sum(len(v) for v in results.values())
+        conn.close()
+        return results
     
     def get_stats(self):
-        summary = {
+        conn = self.get_conn()
+        cur = conn.cursor()
+        
+        stats = {}
+        for table in ['rules', 'strategy', 'counting_systems', 'projects', 
+                     'deviations', 'history', 'probabilities', 'search_index']:
+            count = cur.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
+            stats[table] = count
+        
+        conn.close()
+        return {
+            "database": str(DB_PATH),
             "generated_at": "2026-09-08",
-            "data_sources": {
-                "basic_strategy": "S17/H17 标准基本策略表",
-                "counting_systems": "9种主流算牌系统",
-                "projects": "GitHub 21点相关开源项目",
-                "history": "21点历史资料",
-                "deviations": "Illustrious 18 + Fab 4 偏差索引"
-            },
-            "statistics": {
-                "strategy_tables": 2,
-                "counting_systems": 9,
-                "projects_indexed": 7,
-                "deviation_indexes": 22
-            }
+            "statistics": stats,
+            "total_records": sum(stats.values())
         }
-        return summary
     
     def get_probabilities(self):
-        prob_path = self.DATA_DIR / "probabilities.json"
-        if prob_path.exists():
-            with open(prob_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "概率数据未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM probabilities ORDER BY id")
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "probabilities": rows}
     
     def get_history(self):
-        history_path = self.DATA_DIR / "history.json"
-        if history_path.exists():
-            with open(history_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "历史数据未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM history ORDER BY year ASC")
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "history": rows}
     
     def get_deviations(self):
-        dev_path = self.DATA_DIR / "deviation_indexes.json"
-        if dev_path.exists():
-            with open(dev_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {"error": "偏差索引未找到"}
+        conn = self.get_conn()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM deviations ORDER BY category, index DESC")
+        rows = [dict(r) for r in cur.fetchall()]
+        conn.close()
+        return {"total": len(rows), "deviations": rows}
     
     def log_message(self, format, *args):
         """静默日志"""
         pass
 
-def load_data():
-    """加载数据到内存"""
-    # 预加载数据供未来使用
-    pass
+def main():
+    """主函数"""
+    if not DB_PATH.exists():
+        print("❌ 数据库不存在，请先运行 init_db.py")
+        return
+    
+    server = HTTPServer(('0.0.0.0', 8000), KnowledgeBaseHandler)
+    print(f"🃏 21点知识库API已启动: http://localhost:8000")
+    print(f"📊 数据库: {DB_PATH}")
+    print("API端点: /rules, /strategy, /projects, /search?q=xxx, /stats")
+    server.serve_forever()
 
 if __name__ == "__main__":
-    load_data()
-    server = HTTPServer(('0.0.0.0', 8000), KnowledgeBaseHandler)
-    print("🃏 21点知识库API已启动: http://localhost:8000")
-    server.serve_forever()
+    main()

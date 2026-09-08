@@ -17,12 +17,15 @@ source venv/bin/activate
 
 # 安装依赖
 echo "📥 安装依赖..."
-pip install -r requirements.txt
+pip install -q fastapi uvicorn httpx
 
-# 拉取数据
-echo "🔄 拉取种子数据..."
-python3 scrape/pull_basics.py
+# 初始化数据库
+echo "🗄️  初始化SQLite数据库..."
+python3 api/init_db.py
 
 # 启动服务
 echo "🚀 启动API服务..."
+echo "API地址: http://localhost:8000"
+echo "数据库: knowledge_base.db"
+echo ""
 python3 api/server.py

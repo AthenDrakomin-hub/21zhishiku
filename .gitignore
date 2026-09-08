@@ -24,6 +24,10 @@ build/
 .DS_Store
 Thumbs.db
 
+# Database
+*.db
+*.db-journal
+
 # Local config
 .env
 .env.*
