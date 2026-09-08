@@ -1,0 +1,9 @@
+# Playwright
+playwright>=1.42.0
+
+# 计算机视觉(可选)
+opencv-python>=4.9.0
+numpy>=1.24.0
+
+# 图像处理(可选)
+Pillow>=10.0.0
