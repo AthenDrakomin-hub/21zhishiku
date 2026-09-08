@@ -25,4 +25,6 @@ build/
 Thumbs.db
 
 # Local config
-.env.local
+.env
+.env.*
+!.env.example
