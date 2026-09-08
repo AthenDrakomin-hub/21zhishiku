@@ -1,0 +1,39 @@
+{
+  "illustrious_18": [
+    {"hand": "12_vs_2", "index": 3, "deviation": "stand instead of hit"},
+    {"hand": "12_vs_3", "index": 2, "deviation": "stand instead of hit"},
+    {"hand": "insurance", "index": 3, "deviation": "take insurance"},
+    {"hand": "16_vs_10", "index": 0, "deviation": "stand instead of hit"},
+    {"hand": "10_vs_A", "index": 1, "deviation": "stand instead of hit"},
+    {"hand": "13_vs_2", "index": 1, "deviation": "stand instead of hit"},
+    {"hand": "11_vs_11", "index": 1, "deviation": "split instead of hit"},
+    {"hand": "A,8_vs_2", "index": 1, "deviation": "stand instead of double"},
+    {"hand": "15_vs_10", "index": 0, "deviation": "stand instead of hit"},
+    {"hand": "15_vs_9", "index": 2, "deviation": "stand instead of hit"},
+    {"hand": "10_vs_10", "index": 1, "deviation": "stand instead of hit"},
+    {"hand": "12_vs_4", "index": -1, "deviation": "hit instead of stand"},
+    {"hand": "12_vs_5", "index": -1, "deviation": "hit instead of stand"},
+    {"hand": "12_vs_6", "index": -1, "deviation": "hit instead of stand"},
+    {"hand": "15_vs_A", "index": 1, "deviation": "stand instead of hit"},
+    {"hand": "A,7_vs_2", "index": -2, "deviation": "hit instead of double"},
+    {"hand": "16_vs_9", "index": 1, "deviation": "stand instead of hit"},
+    {"hand": "16_vs_A", "index": 1, "deviation": "stand instead of hit"}
+  ],
+  "fab_4": [
+    {"hand": "14_vs_10", "index": 3, "deviation": "surrender if allowed"},
+    {"hand": "15_vs_10", "index": 0, "deviation": "stand instead of hit"},
+    {"hand": "15_vs_9", "index": 2, "deviation": "stand instead of hit"},
+    {"hand": "15_vs_A", "index": 1, "deviation": "stand instead of hit"}
+  ],
+  "h17_vs_s17": {
+    "soft_18_vs_9": {"s17": "stand", "h17": "hit"},
+    "soft_18_vs_A": {"s17": "stand", "h17": "hit"},
+    "hard_10_vs_10": {"s17": "double", "h17": "hit"},
+    "hard_10_vs_A": {"s17": "double", "h17": "hit"}
+  },
+  "notes": {
+    "source": "Blackjack Attack by Don Schlesinger",
+    "usage": "When True Count >= index number, deviate from basic strategy",
+    "examples": "TC +3 or higher: stand on 12 vs 2/3, take insurance"
+  }
+}

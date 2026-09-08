@@ -1,0 +1,30 @@
+{
+  "history": {
+    "origin": {
+      "period": "1600s-1700s",
+      "location": "France",
+      "original_name": "Vingt-et-Un (French for 21)",
+      "first_reference": "Cervantes' Don Quixote (early 1600s)",
+      "spread_to": "North America via French colonists (18th century)",
+      "name_change": "Around 1899, Nevada casinos offered 10:1 bonus for Ace of Spades + Jack of Spades/Clubs"
+    },
+    "milestones": [
+      {"year": "1820", "event": "First legalized gambling in New Orleans"},
+      {"year": "1931", "event": "Nevada legalized gambling, blackjack became casino staple"},
+      {"year": "1962", "event": "Edward Thorp published 'Beat the Dealer', introducing card counting"},
+      {"year": "1990s", "event": "Online blackjack emerged"},
+      {"year": "2000s", "event": "Live dealer blackjack became popular"}
+    ]
+  },
+  "famous_players": [
+    {"name": "Edward Thorp", "contribution": "First to mathematically prove card counting works", "book": "Beat the Dealer (1962)"},
+    {"name": "Ken Uston", "contribution": "Popularized card counting, fought casino banning", "book": "Beat the Dealer Too"},
+    {"name": "Lawance Revere", "contribution": "Developed Zen Count system", "book": "Professional Concepts in Blackjack"},
+    {"name": "Don Schlesinger", "contribution": "Developed index numbers (Illustrious 18)", "book": "Blackjack Attack"}
+  ],
+  "casino_evolution": {
+    "vegas_golden_nugget": "First casino to ban card counters (1960s)",
+    "automated_shufflers": "Continuous shuffling machines to counter counting",
+    "live_dealer": "Online casinos with real dealers via video stream"
+  }
+}
