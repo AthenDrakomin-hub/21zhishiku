@@ -1,0 +1,45 @@
+{
+  "rules": {
+    "basic": {
+      "goal": "牌面点数总和接近21点但不超过21点，比庄家大即赢",
+      "cards": {
+        "A": [1, 11],
+        "2-9": "按面值计算",
+        "10/J/Q/K": 10
+      },
+      "blackjack": "首两张牌为A+10/花牌，赔付1.5倍",
+      "bust": "点数超过21点，立即输",
+      "push": "点数相同，返还赌注"
+    },
+    "actions": {
+      "hit": "要一张牌",
+      "stand": "停牌不动",
+      "double": "加倍赌注，只拿一张牌",
+      "split": "分开对子，各打一手",
+      "surrender": "认输，返还一半赌注",
+      "insurance": "庄家有A时买保险，赔付2倍"
+    },
+    "variations": {
+      "soft17": "庄家必须在软17（含A）时停牌",
+      "hard17": "庄家硬17时必须停牌",
+      "das": "允许分牌后加倍",
+      "nos_das": "分牌后不允许加倍",
+      "peek": "庄家 peek 黑杰克（有A或10点牌时）",
+      "no_peek": "庄家不 peek"
+    }
+  },
+  "terms": [
+    {"en": "Blackjack", "zh": "黑杰克/二十一点", "desc": "首两张牌和为21"},
+    {"en": "Bust", "zh": "爆牌", "desc": "牌面超过21点"},
+    {"en": "Push", "zh": "平局", "desc": "与庄家同点，返还赌注"},
+    {"en": "Soft Hand", "zh": "软牌", "desc": "含A且A计为11的牌型"},
+    {"en": "Hard Hand", "zh": "硬牌", "desc": "不含A或A只能计为1的牌型"},
+    {"en": "True Count", "zh": "真实计数", "desc": "剩余牌堆数除去的调整计数"},
+    {"en": "Penetration", "zh": "渗透率", "desc": "洗牌前使用的牌比例"}
+  ],
+  "strategy_notes": {
+    "basic_strategy_edge": "约0.5%",
+    "card_counting_edge": "可提升至1-2%",
+    "optimal_bet_spread": "1:16 或更高"
+  }
+}

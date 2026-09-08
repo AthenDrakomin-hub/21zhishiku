@@ -1,0 +1,68 @@
+name: Daily Knowledge Base Update
+
+on:
+  schedule:
+    # 每天 UTC 时间 09:00 执行 (北京时间 17:00)
+    - cron: '0 9 * * *'
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  update-knowledge-base:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Run data scraper
+      run: |
+        python scrape/pull_basics.py
+    
+    - name: Update project index from GitHub
+      run: |
+        python3 << 'EOF'
+        import json
+        import os
+        from pathlib import Path
+        from datetime import datetime
+        
+        # 21点相关GitHub搜索关键词
+        SEARCH_QUERIES = [
+            "blackjack strategy",
+            "blackjack card counting",
+            "blackjack simulator",
+            "blackjack trainer",
+            "blackjack python"
+        ]
+        
+        projects_path = Path("data/projects.json")
+        if projects_path.exists():
+            with open(projects_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            data['last_updated'] = datetime.utcnow().isoformat() + 'Z'
+            
+            with open(projects_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            
+            print(f"✓ 更新时间戳: {data['last_updated']}")
+        EOF
+    
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff --cached --quiet || git commit -m "📊 自动更新知识库 - $(date +%Y-%m-%d)" || echo "无变更"
+        git push

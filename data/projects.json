@@ -1,0 +1,88 @@
+{
+  "projects": [
+    {
+      "name": "Blackjack-Strategy-Simulator",
+      "author": "AttackingOrDefending",
+      "stars": 97,
+      "url": "https://github.com/AttackingOrDefending/Blackjack-Strategy-Simulator",
+      "language": "Python",
+      "tags": ["strategy", "simulator", "monte-carlo", "ev-calculation"],
+      "description": "综合策略模拟器，支持生成自定义策略表、计算EV、算牌偏差",
+      "features": ["策略表生成", "EV计算", "蒙特卡洛模拟", "多线程"],
+      "license": "AGPLv3"
+    },
+    {
+      "name": "blackjack-gui",
+      "author": "tukiains",
+      "stars": 16,
+      "url": "https://github.com/tukiains/blackjack-gui",
+      "language": "Python",
+      "tags": ["gui", "trainer", "card-counting"],
+      "description": "带图形界面的21点游戏，支持AI对弈和算牌练习",
+      "features": ["GUI界面", "CLI模式", "AI训练", "算牌练习"],
+      "license": "MIT"
+    },
+    {
+      "name": "Card_Counting",
+      "author": "jackedison",
+      "stars": 10,
+      "url": "https://github.com/jackedison/Card_Counting",
+      "language": "Python",
+      "tags": ["card-counting", "monte-carlo", "simulation"],
+      "description": "算牌策略蒙特卡洛模拟器，支持多种算牌系统",
+      "features": ["多系统支持", "投注分析", "结果可视化"],
+      "license": "MIT"
+    },
+    {
+      "name": "blackjack-trainer",
+      "author": "Childebrand94",
+      "stars": 0,
+      "url": "https://github.com/Childebrand94/blackjack-trainer",
+      "language": "TypeScript",
+      "tags": ["trainer", "basic-strategy", "card-counting"],
+      "description": "交互式21点策略训练器，支持基本策略和算牌练习",
+      "features": ["基本策略训练", "算牌练习", "AI庄家"],
+      "license": "MIT"
+    },
+    {
+      "name": "blackjack-basic-strategy",
+      "author": "roboflow",
+      "stars": 41,
+      "url": "https://github.com/roboflow/blackjack-basic-strategy",
+      "language": "JavaScript",
+      "tags": ["computer-vision", "basic-strategy", "web"],
+      "description": "基于计算机视觉的基本策略应用，使用YOLO检测卡牌",
+      "features": ["卡牌检测", "策略推荐", "实时计算"],
+      "license": "MIT"
+    },
+    {
+      "name": "BlackjackCardCounter",
+      "author": "PrintName",
+      "stars": 0,
+      "url": "https://github.com/PrintName/BlackjackCardCounter",
+      "language": "Python",
+      "tags": ["card-counting", "desktop-app"],
+      "description": "桌面端算牌辅助工具，支持Hi-Lo等多种系统",
+      "features": ["实时计数", "图表显示", "概率计算"],
+      "license": "MIT"
+    },
+    {
+      "name": "Blackjack-Strategy",
+      "author": "wasifijaz",
+      "stars": 0,
+      "url": "https://github.com/wasifijaz/BlackJack-Bot",
+      "language": "Python",
+      "tags": ["bot", "deep-learning", "cv"],
+      "description": "基于深度学习的21点自动游戏机器人",
+      "features": ["YOLOv8卡牌检测", "PaddleOCR", "DQN决策"],
+      "license": "MIT"
+    }
+  ],
+  "topics": {
+    "strategy": ["基本策略表", "EV计算", "策略生成"],
+    "card-counting": ["Hi-Lo", "KO", "Omega II", "算牌系统"],
+    "simulation": ["蒙特卡洛", "结果分析", "风险计算"],
+    "training": ["策略练习", "算牌训练", "AI对弈"],
+    "cv": ["卡牌检测", "策略推荐", "实时计算"]
+  }
+}

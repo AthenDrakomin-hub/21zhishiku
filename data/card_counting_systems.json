@@ -1,0 +1,85 @@
+[
+  {
+    "name": "Hi-Lo",
+    "type": "Level-1",
+    "description": "最流行的算牌系统，简单高效",
+    "values": [1, 1, 1, 1, 1, 0, 0, 0, 0, -1, -1, -1, -1],
+    "cards": {"A": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 0, "8": 0, "9": 0, "10": -1, "J": -1, "Q": -1, "K": -1},
+    "difficulty": "入门",
+    "accuracy": "高",
+    "use_case": "适合大多数玩家"
+  },
+  {
+    "name": "Ace-Five",
+    "type": "Level-0",
+    "description": "只跟踪A和5，极简系统",
+    "values": [-1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "cards": {"A": -1, "5": 1, "others": 0},
+    "difficulty": "极简",
+    "accuracy": "低",
+    "use_case": "初学者入门练习"
+  },
+  {
+    "name": "KO",
+    "type": "Unbalanced",
+    "description": "不平衡算牌系统，无需计算真实计数",
+    "values": [1, 1, 1, 1, 1, -1, 0, 0, 0, 1, -1, -1, -1],
+    "difficulty": "中等",
+    "accuracy": "高",
+    "use_case": "多副牌游戏"
+  },
+  {
+    "name": "Hi-Opt I",
+    "type": "Level-1",
+    "description": "平衡系统，比Hi-Lo更精确",
+    "values": [1, 1, 1, 0, 1, -1, 0, 0, 0, -1, -1, -1, -1],
+    "difficulty": "进阶",
+    "accuracy": "很高",
+    "use_case": "单副牌游戏"
+  },
+  {
+    "name": "Hi-Opt II",
+    "type": "Level-2",
+    "description": "双级系统，精度最高",
+    "values": [1, 1, 2, 0, 1, -1, 0, 0, 0, -1, -1, -2, -1],
+    "difficulty": "高级",
+    "accuracy": "极高",
+    "use_case": "专业玩家"
+  },
+  {
+    "name": "Omega II",
+    "type": "Level-2",
+    "description": "平衡双级系统",
+    "values": [1, 1, 2, 0, 1, -1, -1, 0, 0, -1, -1, -2, -1],
+    "difficulty": "高级",
+    "accuracy": "很高",
+    "use_case": "深度算牌"
+  },
+  {
+    "name": "Red 7",
+    "type": "Unbalanced",
+    "description": "不平衡系统，红7为+1，其他简单",
+    "values": [0, 1, 1, 0, 1, -1, 1, 0, 0, -1, -1, -1, -1],
+    "difficulty": "入门",
+    "accuracy": "中等",
+    "use_case": "娱乐玩家"
+  },
+  {
+    "name": "Zen",
+    "type": "Level-2",
+    "description": "平衡双级系统，高精度",
+    "values": [1, 1, 2, 0, 1, -1, -1, 0, 0, -1, -1, -2, -1],
+    "difficulty": "专家",
+    "accuracy": "极高",
+    "use_case": "职业算牌"
+  },
+  {
+    "name": "OPP",
+    "type": "Level-1",
+    "description": "简单平衡系统，易学",
+    "values": [1, 1, 0, 1, -1, -1, 0, 0, 0, -1, -1, -1, -1],
+    "difficulty": "入门",
+    "accuracy": "中等",
+    "use_case": "休闲娱乐"
+  }
+]

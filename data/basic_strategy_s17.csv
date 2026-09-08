@@ -1,0 +1,34 @@
+hand,vs_2,vs_3,vs_4,vs_5,vs_6,vs_7,vs_8,vs_9,vs_10,vs_A
+# Hard Hands (无A或A只能为1)
+17,stand,stand,stand,stand,stand,stand,stand,stand,stand,stand
+16,stand,stand,stand,stand,stand,hit,hit,hit,hit,hit
+15,stand,stand,stand,stand,stand,hit,hit,hit,hit,hit
+14,stand,stand,stand,stand,stand,hit,hit,hit,hit,hit
+13,stand,stand,stand,stand,stand,hit,hit,hit,hit,hit
+12,stand,stand,hit,hit,hit,hit,hit,hit,hit,hit
+11,double,double,double,double,double,double,double,double,hit,hit
+10,double,double,double,double,double,double,double,hit,hit,hit
+9,hit,hit,double,double,double,hit,hit,hit,hit,hit
+8,hit,hit,hit,hit,hit,hit,hit,hit,hit,hit
+7-1,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+
+# Soft Hands (含A，A计为11)
+A,8,Hit,Double,Double,Double,Double,Double,Hit,Hit,Hit,Hit
+A,7,Double,Double,Double,Double,Double,Hit,Hit,Hit,Hit,Hit
+A,6,Double,Double,Double,Double,Hit,Hit,Hit,Hit,Hit,Hit
+A,5,Double,Double,Double,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+A,4,Double,Double,Double,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+A,3,Double,Double,Double,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+A,2,Double,Double,Double,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+
+# Pair Splitting (对子)
+A,A,Split,Split,Split,Split,Split,Split,Split,Split,Split,Split
+8,8,Split,Split,Split,Split,Split,Split,Split,Split,Split,Split
+10,10,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+5,5,Double,Double,Double,Double,Double,Double,Double,hit,hit,hit
+4,4,Split,Split,Split,Split,Stand,Stand,Stand,Stand,Stand,Stand
+9,9,Split,Split,Split,Split,Split,Stand,Split,Split,Stand,Stand
+7,7,Split,Split,Split,Split,Split,Split,Stand,Stand,Stand,Stand
+6,6,Split,Split,Split,Split,Split,Stand,Stand,Stand,Stand,Stand
+3,3,Split,Split,Split,Split,Split,Split,Stand,Stand,Stand,Stand
+2,2,Split,Split,Split,Split,Split,Split,Stand,Stand,Stand,Stand
