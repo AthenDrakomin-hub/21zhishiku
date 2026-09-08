@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-09-08",
+  "last_updated": "2026-09-08T01:01:37.362628Z",
   "total_projects": 45,
   "projects": [
     {
@@ -8,9 +8,19 @@
       "stars": 201,
       "url": "https://github.com/seblau/BlackJack-Simulator",
       "language": "Python",
-      "tags": ["blackjack", "strategy", "card-counting", "omega-ii", "simulator"],
+      "tags": [
+        "blackjack",
+        "strategy",
+        "card-counting",
+        "omega-ii",
+        "simulator"
+      ],
       "description": "Python实现的Blackjack模拟器，内置Omega II算牌系统",
-      "features": ["Omega II算牌", "策略模拟", "回合分析"],
+      "features": [
+        "Omega II算牌",
+        "策略模拟",
+        "回合分析"
+      ],
       "license": "MIT"
     },
     {
@@ -19,9 +29,21 @@
       "stars": 97,
       "url": "https://github.com/AttackingOrDefending/Blackjack-Strategy-Simulator",
       "language": "Python",
-      "tags": ["strategy", "simulator", "monte-carlo", "ev-calculation", "card-counting"],
+      "tags": [
+        "strategy",
+        "simulator",
+        "monte-carlo",
+        "ev-calculation",
+        "card-counting"
+      ],
       "description": "最全面的开源21点策略模拟器，支持自定义规则、策略表生成、EV计算、蒙特卡洛模拟",
-      "features": ["策略表生成", "EV计算", "蒙特卡洛模拟", "多线程", "算牌偏差"],
+      "features": [
+        "策略表生成",
+        "EV计算",
+        "蒙特卡洛模拟",
+        "多线程",
+        "算牌偏差"
+      ],
       "license": "AGPLv3"
     },
     {
@@ -30,9 +52,20 @@
       "stars": 70,
       "url": "https://github.com/mhluska/blackjack-simulator",
       "language": "TypeScript",
-      "tags": ["simulator", "blackjack", "hi-lo", "ev", "multiprocessing"],
+      "tags": [
+        "simulator",
+        "blackjack",
+        "hi-lo",
+        "ev",
+        "multiprocessing"
+      ],
       "description": "真实感Blackjack模拟器，支持Hi-Lo算牌练习和任意桌况EV计算",
-      "features": ["Hi-Lo算牌", "EV计算", "多进程", "桌况模拟"],
+      "features": [
+        "Hi-Lo算牌",
+        "EV计算",
+        "多进程",
+        "桌况模拟"
+      ],
       "license": "MIT"
     },
     {
@@ -41,9 +74,20 @@
       "stars": 16,
       "url": "https://github.com/1andDone/blackjack",
       "language": "Python",
-      "tags": ["blackjack", "simulator", "card-counting", "back-counting", "wonging"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "card-counting",
+        "back-counting",
+        "wonging"
+      ],
       "description": "高度可定制的Blackjack模拟工具，支持Back Counting和Wonging策略",
-      "features": ["Back Counting", "Wonging", "策略分析", "投注分析"],
+      "features": [
+        "Back Counting",
+        "Wonging",
+        "策略分析",
+        "投注分析"
+      ],
       "license": "MIT"
     },
     {
@@ -52,9 +96,20 @@
       "stars": 16,
       "url": "https://github.com/jgayda/blackjack-simulator",
       "language": "Python",
-      "tags": ["blackjack", "strategy", "bankroll", "betting", "simulation"],
+      "tags": [
+        "blackjack",
+        "strategy",
+        "bankroll",
+        "betting",
+        "simulation"
+      ],
       "description": "Python模拟Blackjack，分析策略对玩家资金的影响",
-      "features": ["策略分析", "资金管理", "投注 spread", "EV评估"],
+      "features": [
+        "策略分析",
+        "资金管理",
+        "投注 spread",
+        "EV评估"
+      ],
       "license": "MIT"
     },
     {
@@ -63,9 +118,20 @@
       "stars": 16,
       "url": "https://github.com/tukiains/blackjack-gui",
       "language": "Python",
-      "tags": ["gui", "trainer", "card-counting", "basic-strategy"],
+      "tags": [
+        "gui",
+        "trainer",
+        "card-counting",
+        "basic-strategy"
+      ],
       "description": "带图形界面的21点游戏，支持AI对弈和算牌练习",
-      "features": ["GUI界面", "CLI模式", "AI训练", "算牌练习", "偏差索引"],
+      "features": [
+        "GUI界面",
+        "CLI模式",
+        "AI训练",
+        "算牌练习",
+        "偏差索引"
+      ],
       "license": "MIT"
     },
     {
@@ -74,9 +140,19 @@
       "stars": 10,
       "url": "https://github.com/jackedison/Card_Counting",
       "language": "Python",
-      "tags": ["card-counting", "monte-carlo", "simulation", "betting"],
+      "tags": [
+        "card-counting",
+        "monte-carlo",
+        "simulation",
+        "betting"
+      ],
       "description": "算牌策略蒙特卡洛模拟器，支持9种算牌系统和投注分析",
-      "features": ["多系统支持", "投注分析", "结果可视化", "参数可调"],
+      "features": [
+        "多系统支持",
+        "投注分析",
+        "结果可视化",
+        "参数可调"
+      ],
       "license": "MIT"
     },
     {
@@ -85,9 +161,19 @@
       "stars": 10,
       "url": "https://github.com/mmichie/cardsharp",
       "language": "Python",
-      "tags": ["card-game", "simulator", "blackjack", "cli", "strategy"],
+      "tags": [
+        "card-game",
+        "simulator",
+        "blackjack",
+        "cli",
+        "strategy"
+      ],
       "description": "Python卡牌游戏模拟包，支持Blackjack并可扩展至其他卡牌游戏",
-      "features": ["CLI接口", "策略测试", "可扩展架构"],
+      "features": [
+        "CLI接口",
+        "策略测试",
+        "可扩展架构"
+      ],
       "license": "MIT"
     },
     {
@@ -96,9 +182,18 @@
       "stars": 10,
       "url": "https://github.com/shikanchen/Blackjack-Simulation",
       "language": "Python",
-      "tags": ["blackjack", "q-learning", "reinforcement-learning", "ai"],
+      "tags": [
+        "blackjack",
+        "q-learning",
+        "reinforcement-learning",
+        "ai"
+      ],
       "description": "基于Q-Learning的21点AI模拟，让AI自主学习最优策略",
-      "features": ["Q-Learning", "AI自学习", "策略优化"],
+      "features": [
+        "Q-Learning",
+        "AI自学习",
+        "策略优化"
+      ],
       "license": "MIT"
     },
     {
@@ -107,9 +202,18 @@
       "stars": 0,
       "url": "https://github.com/mattbarrett98/black-jack-black-belt",
       "language": "Python",
-      "tags": ["reinforcement-learning", "blackjack", "card-counting", "dashboard"],
+      "tags": [
+        "reinforcement-learning",
+        "blackjack",
+        "card-counting",
+        "dashboard"
+      ],
       "description": "使用强化学习寻找Blackjack最优策略，结合算牌和资金管理系统",
-      "features": ["RL训练", "Hi-Lo算牌", "Tableau可视化"],
+      "features": [
+        "RL训练",
+        "Hi-Lo算牌",
+        "Tableau可视化"
+      ],
       "license": "MIT"
     },
     {
@@ -118,9 +222,19 @@
       "stars": 3,
       "url": "https://github.com/johntelforduk/blackjack",
       "language": "Rust",
-      "tags": ["blackjack", "simulator", "card-counting", "rust", "cli"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "card-counting",
+        "rust",
+        "cli"
+      ],
       "description": "Rust实现的免费开源Blackjack策略模拟器",
-      "features": ["Rust高性能", "CLI", "策略分析"],
+      "features": [
+        "Rust高性能",
+        "CLI",
+        "策略分析"
+      ],
       "license": "MIT"
     },
     {
@@ -129,9 +243,21 @@
       "stars": 1,
       "url": "https://github.com/Lif28/BlackJack-Card-Counter",
       "language": "Python",
-      "tags": ["card-counting", "hi-lo", "tkinter", "monte-carlo", "bankroll"],
+      "tags": [
+        "card-counting",
+        "hi-lo",
+        "tkinter",
+        "monte-carlo",
+        "bankroll"
+      ],
       "description": "Python Tkinter算牌训练工具，支持Hi-Lo/Zen/Omega II及Illustrious 18",
-      "features": ["多算牌系统", "EV计算", "蒙特卡洛模拟", "EOR分析", "资金管理"],
+      "features": [
+        "多算牌系统",
+        "EV计算",
+        "蒙特卡洛模拟",
+        "EOR分析",
+        "资金管理"
+      ],
       "license": "MIT"
     },
     {
@@ -140,9 +266,19 @@
       "stars": 0,
       "url": "https://github.com/GitanElyon/blackjack-AI",
       "language": "Python",
-      "tags": ["blackjack", "q-learning", "card-counting", "ai", "reinforcement-learning"],
+      "tags": [
+        "blackjack",
+        "q-learning",
+        "card-counting",
+        "ai",
+        "reinforcement-learning"
+      ],
       "description": "基于Q-Learning的21点AI，既能玩游戏也能算牌",
-      "features": ["Q-Learning", "算牌能力", "自主学习"],
+      "features": [
+        "Q-Learning",
+        "算牌能力",
+        "自主学习"
+      ],
       "license": "MIT"
     },
     {
@@ -151,9 +287,19 @@
       "stars": 0,
       "url": "https://github.com/5igor99/Blackjack",
       "language": "Python",
-      "tags": ["blackjack", "card-counting", "hi-lo", "tkinter", "desktop-app"],
+      "tags": [
+        "blackjack",
+        "card-counting",
+        "hi-lo",
+        "tkinter",
+        "desktop-app"
+      ],
       "description": "一站式Blackjack算牌器和策略训练器，支持Hi-Lo和真实计数偏差",
-      "features": ["Hi-Lo算牌", "偏差训练", "桌面应用"],
+      "features": [
+        "Hi-Lo算牌",
+        "偏差训练",
+        "桌面应用"
+      ],
       "license": "MIT"
     },
     {
@@ -162,9 +308,18 @@
       "stars": 0,
       "url": "https://github.com/varunmc/card-counting-trainer",
       "language": "Java",
-      "tags": ["card-counting", "trainer", "java", "education"],
+      "tags": [
+        "card-counting",
+        "trainer",
+        "java",
+        "education"
+      ],
       "description": "Java实现的算牌训练器，帮助玩家练习和提高算牌速度",
-      "features": ["速度训练", "多种难度", "进度追踪"],
+      "features": [
+        "速度训练",
+        "多种难度",
+        "进度追踪"
+      ],
       "license": "MIT"
     },
     {
@@ -173,9 +328,19 @@
       "stars": 0,
       "url": "https://github.com/loktioncode/black_jack",
       "language": "Python",
-      "tags": ["blackjack", "strategy", "bankroll", "simulation"],
+      "tags": [
+        "blackjack",
+        "strategy",
+        "bankroll",
+        "simulation"
+      ],
       "description": "交互式Blackjack模拟，含资金管理和牌堆渗透率分析",
-      "features": ["交互模式", "资金管理", "牌堆渗透率", "策略辅助"],
+      "features": [
+        "交互模式",
+        "资金管理",
+        "牌堆渗透率",
+        "策略辅助"
+      ],
       "license": "MIT"
     },
     {
@@ -184,9 +349,20 @@
       "stars": 0,
       "url": "https://github.com/phil9922/blackjack-coach",
       "language": "TypeScript",
-      "tags": ["trainer", "basic-strategy", "card-counting", "ai", "llm"],
+      "tags": [
+        "trainer",
+        "basic-strategy",
+        "card-counting",
+        "ai",
+        "llm"
+      ],
       "description": "AI驱动的Blackjack教练，使用LLM分析每手牌并给出解释",
-      "features": ["LLM教练", "决策评分", "弱点分析", "个性化训练"],
+      "features": [
+        "LLM教练",
+        "决策评分",
+        "弱点分析",
+        "个性化训练"
+      ],
       "license": "MIT"
     },
     {
@@ -195,9 +371,19 @@
       "stars": 0,
       "url": "https://github.com/simonebusattotech/Blackjack",
       "language": "Python",
-      "tags": ["blackjack", "card-counting", "hi-lo", "tkinter", "desktop-app"],
+      "tags": [
+        "blackjack",
+        "card-counting",
+        "hi-lo",
+        "tkinter",
+        "desktop-app"
+      ],
       "description": "集成Hi-Lo算牌和真实计数偏差的一站式训练器",
-      "features": ["Hi-Lo", "偏差训练", "桌面客户端"],
+      "features": [
+        "Hi-Lo",
+        "偏差训练",
+        "桌面客户端"
+      ],
       "license": "MIT"
     },
     {
@@ -206,9 +392,17 @@
       "stars": 0,
       "url": "https://github.com/olivergarnica/bto",
       "language": "Python",
-      "tags": ["blackjack", "simulator", "card-counting", "trainer"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "card-counting",
+        "trainer"
+      ],
       "description": "边玩模拟游戏边练习算牌，提升优势",
-      "features": ["游戏化训练", "实时反馈"],
+      "features": [
+        "游戏化训练",
+        "实时反馈"
+      ],
       "license": "MIT"
     },
     {
@@ -217,9 +411,19 @@
       "stars": 0,
       "url": "https://github.com/Iamlel/Blackjack-Analyst",
       "language": "Java",
-      "tags": ["blackjack", "simulator", "card-counting", "java", "strategy"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "card-counting",
+        "java",
+        "strategy"
+      ],
       "description": "高度可扩展的Blackjack模拟器，支持策略分析和算牌",
-      "features": ["可扩展架构", "策略分析", "统计报告"],
+      "features": [
+        "可扩展架构",
+        "策略分析",
+        "统计报告"
+      ],
       "license": "MIT"
     },
     {
@@ -228,9 +432,18 @@
       "stars": 0,
       "url": "https://github.com/fkuefler/blackjack-lab",
       "language": "Python",
-      "tags": ["blackjack", "terminal", "basic-strategy", "trainer"],
+      "tags": [
+        "blackjack",
+        "terminal",
+        "basic-strategy",
+        "trainer"
+      ],
       "description": "终端界面Blackjack基本策略训练程序",
-      "features": ["终端UI", "策略训练", "多语言移植"],
+      "features": [
+        "终端UI",
+        "策略训练",
+        "多语言移植"
+      ],
       "license": "MIT"
     },
     {
@@ -239,9 +452,20 @@
       "stars": 1,
       "url": "https://github.com/shelialynn304/cashcal",
       "language": "HTML",
-      "tags": ["gambling", "calculator", "blackjack", "bankroll", "simulation"],
+      "tags": [
+        "gambling",
+        "calculator",
+        "blackjack",
+        "bankroll",
+        "simulation"
+      ],
       "description": "赌博数学教育网站，含赌场计算器、资金管理和多种模拟器",
-      "features": ["黑杰克模拟器", "轮盘模拟器", "赛马计算器", "资金管理工具"],
+      "features": [
+        "黑杰克模拟器",
+        "轮盘模拟器",
+        "赛马计算器",
+        "资金管理工具"
+      ],
       "license": "MIT"
     },
     {
@@ -250,9 +474,17 @@
       "stars": 1,
       "url": "https://github.com/LMLK-seal/edge-card-counter",
       "language": "JavaScript",
-      "tags": ["card-counting", "blackjack", "simulator", "educational"],
+      "tags": [
+        "card-counting",
+        "blackjack",
+        "simulator",
+        "educational"
+      ],
       "description": "交互式算牌模拟器，用于学习和练习21点策略",
-      "features": ["交互模拟", "教育用途"],
+      "features": [
+        "交互模拟",
+        "教育用途"
+      ],
       "license": "MIT"
     },
     {
@@ -261,9 +493,19 @@
       "stars": 0,
       "url": "https://github.com/sakshampandey27/blackjack-AI",
       "language": "Python",
-      "tags": ["blackjack", "ai", "monte-carlo", "card-counting", "strategy"],
+      "tags": [
+        "blackjack",
+        "ai",
+        "monte-carlo",
+        "card-counting",
+        "strategy"
+      ],
       "description": "使用AI比较不同21点策略并模拟胜率",
-      "features": ["策略对比", "蒙特卡洛模拟", "AI分析"],
+      "features": [
+        "策略对比",
+        "蒙特卡洛模拟",
+        "AI分析"
+      ],
       "license": "MIT"
     },
     {
@@ -272,9 +514,17 @@
       "stars": 0,
       "url": "https://github.com/lima-limon-inc/Blackjack-basic-strategy",
       "language": "Python",
-      "tags": ["blackjack", "basic-strategy", "terminal", "education"],
+      "tags": [
+        "blackjack",
+        "basic-strategy",
+        "terminal",
+        "education"
+      ],
       "description": "终端界面学习21点基本策略的工具",
-      "features": ["终端交互", "策略教学"],
+      "features": [
+        "终端交互",
+        "策略教学"
+      ],
       "license": "MIT"
     },
     {
@@ -283,9 +533,19 @@
       "stars": 0,
       "url": "https://github.com/RochesterinNYC/BlackjackStrategyTester",
       "language": "MATLAB",
-      "tags": ["blackjack", "strategy", "matlab", "house-edge", "testing"],
+      "tags": [
+        "blackjack",
+        "strategy",
+        "matlab",
+        "house-edge",
+        "testing"
+      ],
       "description": "MATLAB策略测试工具，输入CSV策略表输出庄家优势和资金曲线",
-      "features": ["策略测试", "庄家优势计算", "资金曲线图"],
+      "features": [
+        "策略测试",
+        "庄家优势计算",
+        "资金曲线图"
+      ],
       "license": "MIT"
     },
     {
@@ -294,9 +554,19 @@
       "stars": 7,
       "url": "https://github.com/martinabeleda/blackjack-tracker",
       "language": "Python",
-      "tags": ["opencv", "computer-vision", "blackjack", "card-recognition", "tracker"],
+      "tags": [
+        "opencv",
+        "computer-vision",
+        "blackjack",
+        "card-recognition",
+        "tracker"
+      ],
       "description": "基于OpenCV的实时Blackjack游戏检测器",
-      "features": ["OpenCV检测", "手势识别", "卡牌识别"],
+      "features": [
+        "OpenCV检测",
+        "手势识别",
+        "卡牌识别"
+      ],
       "license": "MIT"
     },
     {
@@ -305,9 +575,18 @@
       "stars": 41,
       "url": "https://github.com/roboflow/blackjack-basic-strategy",
       "language": "JavaScript",
-      "tags": ["computer-vision", "basic-strategy", "web", "yolo"],
+      "tags": [
+        "computer-vision",
+        "basic-strategy",
+        "web",
+        "yolo"
+      ],
       "description": "基于计算机视觉的基本策略应用，使用YOLO检测卡牌并推荐策略",
-      "features": ["卡牌检测", "策略推荐", "实时计算"],
+      "features": [
+        "卡牌检测",
+        "策略推荐",
+        "实时计算"
+      ],
       "license": "MIT"
     },
     {
@@ -316,9 +595,18 @@
       "stars": 0,
       "url": "https://github.com/PrintName/BlackjackCardCounter",
       "language": "Python",
-      "tags": ["card-counting", "desktop-app", "pyqt5", "hi-lo"],
+      "tags": [
+        "card-counting",
+        "desktop-app",
+        "pyqt5",
+        "hi-lo"
+      ],
       "description": "桌面端算牌辅助工具，实时显示计数和概率",
-      "features": ["实时计数", "图表显示", "概率计算"],
+      "features": [
+        "实时计数",
+        "图表显示",
+        "概率计算"
+      ],
       "license": "MIT"
     },
     {
@@ -327,9 +615,20 @@
       "stars": 0,
       "url": "https://github.com/wasifijaz/BlackJack-Bot",
       "language": "Python",
-      "tags": ["bot", "deep-learning", "cv", "yolo", "paddleocr"],
+      "tags": [
+        "bot",
+        "deep-learning",
+        "cv",
+        "yolo",
+        "paddleocr"
+      ],
       "description": "基于深度学习的21点自动游戏机器人，使用YOLOv8和PaddleOCR",
-      "features": ["YOLOv8卡牌检测", "PaddleOCR", "DQN决策", "Flask API"],
+      "features": [
+        "YOLOv8卡牌检测",
+        "PaddleOCR",
+        "DQN决策",
+        "Flask API"
+      ],
       "license": "MIT"
     },
     {
@@ -338,9 +637,18 @@
       "stars": 1,
       "url": "https://github.com/tomalmog/CV-CardCounting",
       "language": "Python",
-      "tags": ["computer-vision", "yolov8", "card-counting", "blackjack"],
+      "tags": [
+        "computer-vision",
+        "yolov8",
+        "card-counting",
+        "blackjack"
+      ],
       "description": "基于YOLOv8的计算机视觉算牌系统，实时检测卡牌并跟踪计数",
-      "features": ["YOLOv8检测", "实时跟踪", "策略推荐"],
+      "features": [
+        "YOLOv8检测",
+        "实时跟踪",
+        "策略推荐"
+      ],
       "license": "MIT"
     },
     {
@@ -349,9 +657,19 @@
       "stars": 0,
       "url": "https://github.com/Jackb-03/OpenCV-Augmented-Reality-Black-Jack-Counter",
       "language": "Python",
-      "tags": ["opencv", "ar", "blackjack", "card-counting", "webcam"],
+      "tags": [
+        "opencv",
+        "ar",
+        "blackjack",
+        "card-counting",
+        "webcam"
+      ],
       "description": "基于OpenCV的AR黑杰克算牌器，配合手机VR眼镜和摄像头使用",
-      "features": ["AR增强现实", "卡牌检测", "实时计数"],
+      "features": [
+        "AR增强现实",
+        "卡牌检测",
+        "实时计数"
+      ],
       "license": "MIT"
     },
     {
@@ -360,9 +678,19 @@
       "stars": 0,
       "url": "https://github.com/hyeonjo00/blackjack-engine-java",
       "language": "Java",
-      "tags": ["blackjack", "simulator", "java", "ai", "desktop"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "java",
+        "ai",
+        "desktop"
+      ],
       "description": "高端桌面Blackjack模拟器，含实时AI策略分析和赌场动画UI",
-      "features": ["AI策略分析", "EV计算", "动画UI"],
+      "features": [
+        "AI策略分析",
+        "EV计算",
+        "动画UI"
+      ],
       "license": "MIT"
     },
     {
@@ -371,9 +699,19 @@
       "stars": 0,
       "url": "https://github.com/martacbijjn1727865/calculator-blackjack-21",
       "language": "Python",
-      "tags": ["blackjack", "calculator", "probability", "strategy", "monte-carlo"],
+      "tags": [
+        "blackjack",
+        "calculator",
+        "probability",
+        "strategy",
+        "monte-carlo"
+      ],
       "description": "高级概率分析和策略优化工具",
-      "features": ["概率分析", "策略优化", "蒙特卡洛模拟"],
+      "features": [
+        "概率分析",
+        "策略优化",
+        "蒙特卡洛模拟"
+      ],
       "license": "MIT"
     },
     {
@@ -382,9 +720,17 @@
       "stars": 5,
       "url": "https://github.com/gLelcu/TUI-BlackJack",
       "language": "TypeScript",
-      "tags": ["blackjack", "tui", "terminal", "simulator"],
+      "tags": [
+        "blackjack",
+        "tui",
+        "terminal",
+        "simulator"
+      ],
       "description": "终端界面Blackjack游戏",
-      "features": ["终端UI", "命令行交互"],
+      "features": [
+        "终端UI",
+        "命令行交互"
+      ],
       "license": "MIT"
     },
     {
@@ -393,9 +739,18 @@
       "stars": 0,
       "url": "https://github.com/lukedunwoody/blackjack-engine",
       "language": "C",
-      "tags": ["blackjack", "c", "ev-calculator", "simulator"],
+      "tags": [
+        "blackjack",
+        "c",
+        "ev-calculator",
+        "simulator"
+      ],
       "description": "C语言实现的实时Blackjack结果计算和权衡引擎",
-      "features": ["C高性能", "实时计算", "EV分析"],
+      "features": [
+        "C高性能",
+        "实时计算",
+        "EV分析"
+      ],
       "license": "MIT"
     },
     {
@@ -404,9 +759,20 @@
       "stars": 1,
       "url": "https://github.com/ludem525/blackjack-team-sim",
       "language": "Python",
-      "tags": ["blackjack", "monte-carlo", "team-play", "ev", "ror"],
+      "tags": [
+        "blackjack",
+        "monte-carlo",
+        "team-play",
+        "ev",
+        "ror"
+      ],
       "description": "Monte Carlo Blackjack团队作战模拟器，含EV、ROR和置信区间",
-      "features": ["团队模拟", "EV计算", "破产风险", "置信区间"],
+      "features": [
+        "团队模拟",
+        "EV计算",
+        "破产风险",
+        "置信区间"
+      ],
       "license": "MIT"
     },
     {
@@ -415,9 +781,17 @@
       "stars": 1,
       "url": "https://github.com/topics/blackjack-strategy",
       "language": "Python",
-      "tags": ["blackjack", "trainer", "card-values", "fast-math"],
+      "tags": [
+        "blackjack",
+        "trainer",
+        "card-values",
+        "fast-math"
+      ],
       "description": "Blackjack数值训练器，帮助快速掌握卡牌面值计算",
-      "features": ["数值训练", "速度提升"],
+      "features": [
+        "数值训练",
+        "速度提升"
+      ],
       "license": "MIT"
     },
     {
@@ -426,9 +800,17 @@
       "stars": 1,
       "url": "https://github.com/Hydrovolter/CardCounter",
       "language": "JavaScript",
-      "tags": ["card-counting", "blackjack", "trainer", "web"],
+      "tags": [
+        "card-counting",
+        "blackjack",
+        "trainer",
+        "web"
+      ],
       "description": "JS实现的算牌训练应用",
-      "features": ["网页训练", "实时反馈"],
+      "features": [
+        "网页训练",
+        "实时反馈"
+      ],
       "license": "MIT"
     },
     {
@@ -437,9 +819,18 @@
       "stars": 1,
       "url": "https://github.com/kai405/TakeBacktheHouse",
       "language": "Python",
-      "tags": ["blackjack", "computer-vision", "haptics", "raspberry-pi"],
+      "tags": [
+        "blackjack",
+        "computer-vision",
+        "haptics",
+        "raspberry-pi"
+      ],
       "description": "实时卡牌视觉识别+触觉决策辅助系统",
-      "features": ["视觉识别", "触觉反馈", "Raspberry Pi"],
+      "features": [
+        "视觉识别",
+        "触觉反馈",
+        "Raspberry Pi"
+      ],
       "license": "MIT"
     },
     {
@@ -448,9 +839,18 @@
       "stars": 0,
       "url": "https://github.com/dootss/valtrain",
       "language": "C++",
-      "tags": ["blackjack", "ev", "strategy-charts", "calculator"],
+      "tags": [
+        "blackjack",
+        "ev",
+        "strategy-charts",
+        "calculator"
+      ],
       "description": "精确EV计算和自定义策略表生成工具",
-      "features": ["EV计算", "策略表生成", "C++高性能"],
+      "features": [
+        "EV计算",
+        "策略表生成",
+        "C++高性能"
+      ],
       "license": "MIT"
     },
     {
@@ -459,9 +859,17 @@
       "stars": 0,
       "url": "https://github.com/ShiiiivanshSingh/BlackJack-Go",
       "language": "Go",
-      "tags": ["blackjack", "go", "simulator", "free-to-play"],
+      "tags": [
+        "blackjack",
+        "go",
+        "simulator",
+        "free-to-play"
+      ],
       "description": "免费Blackjack模拟器",
-      "features": ["免费游玩", "Go语言"],
+      "features": [
+        "免费游玩",
+        "Go语言"
+      ],
       "license": "MIT"
     },
     {
@@ -470,9 +878,20 @@
       "stars": 0,
       "url": "https://github.com/topics/blackjack-simulator",
       "language": "HTML",
-      "tags": ["blackjack", "simulator", "ev", "charts", "strategy"],
+      "tags": [
+        "blackjack",
+        "simulator",
+        "ev",
+        "charts",
+        "strategy"
+      ],
       "description": "结合真实游戏体验、精确EV计算和策略可视化的Blackjack平台",
-      "features": ["游戏体验", "EV计算", "策略图表", "模拟"],
+      "features": [
+        "游戏体验",
+        "EV计算",
+        "策略图表",
+        "模拟"
+      ],
       "license": "MIT"
     },
     {
@@ -481,9 +900,18 @@
       "stars": 0,
       "url": "https://github.com/ellisandrews/blackjack",
       "language": "Python",
-      "tags": ["blackjack", "simulation", "python", "strategy"],
+      "tags": [
+        "blackjack",
+        "simulation",
+        "python",
+        "strategy"
+      ],
       "description": "纯Python实现的Blackjack游戏模拟器",
-      "features": ["纯Python", "策略可配置", "模拟分析"],
+      "features": [
+        "纯Python",
+        "策略可配置",
+        "模拟分析"
+      ],
       "license": "MIT"
     },
     {
@@ -492,18 +920,61 @@
       "stars": 0,
       "url": "https://github.com/chirag-23/Black-Jack-Game",
       "language": "JavaScript",
-      "tags": ["blackjack", "html", "css", "javascript", "game"],
+      "tags": [
+        "blackjack",
+        "html",
+        "css",
+        "javascript",
+        "game"
+      ],
       "description": "经典网页版Blackjack游戏，支持所有设备浏览器",
-      "features": ["响应式设计", "音效", "跨平台"],
+      "features": [
+        "响应式设计",
+        "音效",
+        "跨平台"
+      ],
       "license": "MIT"
     }
   ],
   "topics": {
-    "strategy": ["基本策略表", "EV计算", "策略生成", "策略测试"],
-    "card-counting": ["Hi-Lo", "KO", "Omega II", "Zen", "算牌系统", "偏差索引"],
-    "simulation": ["蒙特卡洛", "结果分析", "风险计算", "团队模拟"],
-    "training": ["策略练习", "算牌训练", "AI对弈", "终端训练"],
-    "cv": ["卡牌检测", "策略推荐", "实时计算", "YOLO", "OpenCV"],
-    "ai": ["Q-Learning", "强化学习", "DQN", "AI教练"]
+    "strategy": [
+      "基本策略表",
+      "EV计算",
+      "策略生成",
+      "策略测试"
+    ],
+    "card-counting": [
+      "Hi-Lo",
+      "KO",
+      "Omega II",
+      "Zen",
+      "算牌系统",
+      "偏差索引"
+    ],
+    "simulation": [
+      "蒙特卡洛",
+      "结果分析",
+      "风险计算",
+      "团队模拟"
+    ],
+    "training": [
+      "策略练习",
+      "算牌训练",
+      "AI对弈",
+      "终端训练"
+    ],
+    "cv": [
+      "卡牌检测",
+      "策略推荐",
+      "实时计算",
+      "YOLO",
+      "OpenCV"
+    ],
+    "ai": [
+      "Q-Learning",
+      "强化学习",
+      "DQN",
+      "AI教练"
+    ]
   }
 }
