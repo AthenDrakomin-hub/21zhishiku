@@ -155,7 +155,7 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
         conn = self.get_conn()
         cur = conn.cursor()
         
-        results = {"rules": [], "projects": [], "systems": [], "total": 0}
+        results = {"rules": [], "projects": [], "systems": []}
         
         # 各表搜索
         cur.execute("SELECT * FROM rules WHERE name LIKE ? OR description LIKE ?", 
@@ -211,10 +211,10 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
     def get_deviations(self):
         conn = self.get_conn()
         cur = conn.cursor()
-        cur.execute("SELECT * FROM deviations ORDER BY category, index DESC")
+        cur.execute("SELECT * FROM deviations ORDER BY category, `index` DESC")
         rows = [dict(r) for r in cur.fetchall()]
         conn.close()
-        return {"total": len(rows), "deviations": rows}
+        return rows
     
     def log_message(self, format, *args):
         """静默日志"""
