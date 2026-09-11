@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21点知识库</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0f1a0f;
+  --surface: #1a2e1a;
+  --surface2: #223322;
+  --border: #2d4a2d;
+  --accent: #4ade80;
+  --accent2: #22c55e;
+  --gold: #fbbf24;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --text: #e2e8e0;
+  --text2: #9ca3af;
+  --radius: 10px;
+}
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1a2e1a 0%, #0f1a0f 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.header-left { display: flex; align-items: center; gap: 12px; }
+.logo { font-size: 28px; }
+.title { font-size: 20px; font-weight: 700; color: var(--accent); }
+.subtitle { font-size: 12px; color: var(--text2); }
+.header-stats { display: flex; gap: 16px; }
+.stat-chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--text2);
+}
+.stat-chip span { color: var(--accent); font-weight: 700; }
+
+/* Layout */
+.layout { display: flex; min-height: calc(100vh - 65px); }
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 65px;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: var(--text2);
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+}
+.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item.active {
+  background: rgba(74, 222, 128, 0.08);
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+.nav-icon { font-size: 16px; width: 20px; text-align: center; }
+
+/* Main */
+.main { flex: 1; padding: 24px; overflow-y: auto; max-width: 1200px; }
+.page { display: none; }
+.page.active { display: block; }
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+.page-desc { color: var(--text2); font-size: 13px; margin-bottom: 20px; }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent2);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Search */
+.search-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.search-input {
+  flex: 1;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+}
+.search-input:focus { border-color: var(--accent); }
+.search-input::placeholder { color: var(--text2); }
+.btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-outline.active { border-color: var(--accent); color: var(--accent); background: rgba(74,222,128,0.08); }
+
+/* Strategy Table */
+.strategy-controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.hand-group { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px; }
+.hand-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.hand-btn:hover { border-color: var(--accent); color: var(--text); }
+.hand-btn.active { background: rgba(74,222,128,0.15); border-color: var(--accent); color: var(--accent); }
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 2px;
+  margin-top: 12px;
+}
+.strat-header {
+  background: var(--surface2);
+  padding: 6px 2px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  border-radius: 4px;
+}
+.strat-cell {
+  background: var(--surface);
+  padding: 8px 2px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: default;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+.strat-cell:hover { border-color: var(--accent); }
+.strat-cell.H { background: rgba(248,113,113,0.15); color: var(--red); }
+.strat-cell.S { background: rgba(96,165,250,0.15); color: var(--blue); }
+.strat-cell.D { background: rgba(251,191,36,0.15); color: var(--gold); }
+.strat-cell.P { background: rgba(74,222,128,0.15); color: var(--accent); }
+.strat-cell.R { background: rgba(248,113,113,0.25); color: var(--red); }
+.strat-row-label {
+  grid-column: 1 / -1;
+  background: var(--surface2);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  border-radius: 4px;
+  margin-top: 4px;
+}
+.legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+/* Counting Systems */
+.system-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.system-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  transition: border-color 0.15s;
+}
+.system-card:hover { border-color: var(--accent); }
+.system-name { font-weight: 700; font-size: 15px; color: var(--accent); margin-bottom: 4px; }
+.system-type { font-size: 11px; color: var(--text2); margin-bottom: 8px; }
+.system-desc { font-size: 13px; color: var(--text); line-height: 1.5; }
+.system-values {
+  display: flex;
+  gap: 3px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.val-badge {
+  width: 28px; height: 28px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+}
+.val-badge.pos { background: rgba(74,222,128,0.2); color: var(--accent); }
+.val-badge.neg { background: rgba(248,113,113,0.2); color: var(--red); }
+.val-badge.zero { background: var(--surface); color: var(--text2); }
+
+/* Projects */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.project-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.project-name { font-weight: 700; font-size: 14px; color: var(--text); }
+.project-stars { color: var(--gold); font-size: 13px; font-weight: 700; }
+.project-lang {
+  display: inline-block;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: var(--text2);
+  margin-top: 4px;
+}
+.project-desc { font-size: 12px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+.project-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag {
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: var(--accent2);
+}
+.project-link {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--blue);
+  text-decoration: none;
+}
+.project-link:hover { text-decoration: underline; }
+
+/* Deviations */
+.deviations-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.deviations-table th {
+  background: var(--surface2);
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+}
+.deviations-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.deviations-table tr:hover td { background: var(--surface2); }
+.dev-cat {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.dev-cat.illustrious { background: rgba(251,191,36,0.15); color: var(--gold); }
+.dev-cat.fab { background: rgba(96,165,250,0.15); color: var(--blue); }
+.index-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.index-pos { background: rgba(74,222,128,0.2); color: var(--accent); }
+.index-neg { background: rgba(248,113,113,0.2); color: var(--red); }
+.index-zero { background: var(--surface2); color: var(--text2); }
+
+/* Probabilities */
+.prob-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.prob-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.prob-card-title { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+.prob-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; }
+.prob-label { color: var(--text2); }
+.prob-value { color: var(--text); font-weight: 600; }
+
+/* Rules */
+.rules-list { display: grid; gap: 8px; }
+.rule-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+}
+.rule-cat {
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  color: var(--accent);
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.rule-content h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.rule-content p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* History */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.timeline-item { position: relative; margin-bottom: 16px; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+}
+.timeline-year { font-size: 12px; color: var(--accent); font-weight: 700; margin-bottom: 2px; }
+.timeline-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.timeline-desc { font-size: 12px; color: var(--text2); }
+
+/* Loading */
+.loading { text-align: center; padding: 40px; color: var(--text2); }
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.error-msg {
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.3);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  color: var(--red);
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { padding: 16px; }
+  .strategy-grid { font-size: 10px; }
+  .header-stats { display: none; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <span class="logo">🃏</span>
+    <div>
+      <div class="title">21点知识库</div>
+      <div class="subtitle">Blackjack Knowledge Base v2.0</div>
+    </div>
+  </div>
+  <div class="header-stats" id="headerStats">
+    <div class="stat-chip">策略 <span id="statStrategy">-</span></div>
+    <div class="stat-chip">项目 <span id="statProjects">-</span></div>
+    <div class="stat-chip">系统 <span id="statSystems">-</span></div>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div class="nav-item active" data-page="dashboard"><span class="nav-icon">🏠</span>首页</div>
+    <div class="nav-item" data-page="strategy"><span class="nav-icon">📊</span>基本策略</div>
+    <div class="nav-item" data-page="counting"><span class="nav-icon">🧮</span>算牌系统</div>
+    <div class="nav-item" data-page="projects"><span class="nav-icon">⭐</span>开源项目</div>
+    <div class="nav-item" data-page="deviations"><span class="nav-icon">⚡</span>偏差索引</div>
+    <div class="nav-item" data-page="probabilities"><span class="nav-icon">🎲</span>概率数据</div>
+    <div class="nav-item" data-page="rules"><span class="nav-icon">📖</span>游戏规则</div>
+    <div class="nav-item" data-page="history"><span class="nav-icon">📜</span>历史资料</div>
+    <div class="nav-item" data-page="search"><span class="nav-icon">🔍</span>搜索</div>
+  </nav>
+
+  <div class="main">
+
+    <!-- Dashboard -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-title">🃏 欢迎使用 21点知识库</div>
+      <div class="page-desc">整合规则、策略、算牌系统与开源项目的一站式参考工具</div>
+      <div id="dashboardContent"></div>
+    </div>
+
+    <!-- Strategy -->
+    <div class="page" id="page-strategy">
+      <div class="page-title">📊 基本策略表</div>
+      <div class="page-desc">根据手牌和庄家明牌，给出最优决策</div>
+      <div class="strategy-controls">
+        <button class="btn btn-sm btn-outline active" id="btnS17" onclick="loadStrategy('s17')">S17 (停17)</button>
+        <button class="btn btn-sm btn-outline" id="btnH17" onclick="loadStrategy('h17')">H17 (要17)</button>
+      </div>
+      <div class="hand-group" id="handGroup"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(248,113,113,0.5)"></div>H = 要牌 Hit</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(96,165,250,0.5)"></div>S = 停牌 Stand</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(251,191,36,0.5)"></div>D = 加倍 Double</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(74,222,128,0.5)"></div>P = 分牌 Split</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(248,113,113,0.7)"></div>R = 投降 Surrender</div>
+      </div>
+      <div class="strategy-grid" id="strategyGrid" style="margin-top:12px"></div>
+    </div>
+
+    <!-- Counting Systems -->
+    <div class="page" id="page-counting">
+      <div class="page-title">🧮 算牌系统</div>
+      <div class="page-desc">主流 Blackjack 算牌系统对比</div>
+      <div class="system-grid" id="systemGrid"></div>
+    </div>
+
+    <!-- Projects -->
+    <div class="page" id="page-projects">
+      <div class="page-title">⭐ 开源项目索引</div>
+      <div class="page-desc">GitHub 上精选的 21点相关项目</div>
+      <div class="search-bar">
+        <input class="search-input" id="projectSearch" placeholder="搜索项目名或描述..." oninput="filterProjects()">
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+    </div>
+
+    <!-- Deviations -->
+    <div class="page" id="page-deviations">
+      <div class="page-title">⚡ 偏差索引</div>
+      <div class="page-desc">当真实计数达到阈值时，偏离基本策略的调整</div>
+      <div class="card">
+        <div class="card-title">Illustrious 18 (Don Schlesinger)</div>
+        <table class="deviations-table">
+          <thead><tr><th>类别</th><th>手牌</th><th>Index</th><th>≥真数</th><th>调整动作</th></tr></thead>
+          <tbody id="illustTable"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">FAB-4 (Four Indices)</div>
+        <table class="deviations-table">
+          <thead><tr><th>类别</th><th>手牌</th><th>Index</th><th>≥真数</th><th>调整动作</th></tr></thead>
+          <tbody id="fabTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Probabilities -->
+    <div class="page" id="page-probabilities">
+      <div class="page-title">🎲 概率数据</div>
+      <div class="page-desc">抽牌概率与爆牌风险</div>
+      <div class="prob-grid" id="probGrid"></div>
+    </div>
+
+    <!-- Rules -->
+    <div class="page" id="page-rules">
+      <div class="page-title">📖 游戏规则</div>
+      <div class="page-desc">基础术语与规则说明</div>
+      <div class="rules-list" id="rulesList"></div>
+    </div>
+
+    <!-- History -->
+    <div class="page" id="page-history">
+      <div class="page-title">📜 历史资料</div>
+      <div class="page-desc">21点的起源与发展里程碑</div>
+      <div class="timeline" id="historyTimeline"></div>
+    </div>
+
+    <!-- Search -->
+    <div class="page" id="page-search">
+      <div class="page-title">🔍 全局搜索</div>
+      <div class="page-desc">跨规则、项目和算牌系统搜索</div>
+      <div class="search-bar">
+        <input class="search-input" id="searchInput" placeholder="输入关键词搜索..." onkeydown="if(event.key==='Enter')doSearch()">
+        <button class="btn" onclick="doSearch()">搜索</button>
+      </div>
+      <div id="searchResults"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:8000';
+let currentVariant = 's17';
+let allProjects = [];
+let allStrategies = {};
+
+// Nav
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('page-' + el.dataset.page).classList.add('active');
+  });
+});
+
+// Load everything
+async function loadAll() {
+  try {
+    const [stats, systems, projects, deviations] = await Promise.all([
+      fetchJSON('/stats'),
+      fetchJSON('/counting-systems'),
+      fetchJSON('/projects'),
+      fetchJSON('/deviations'),
+    ]);
+    updateStats(stats);
+    renderDashboard(stats, systems, projects, deviations);
+    renderCounting(systems);
+    allProjects = projects.projects;
+    renderProjects(allProjects);
+    renderDeviations(deviations);
+  } catch(e) {
+    document.getElementById('dashboardContent').innerHTML = `<div class="error-msg">⚠️ 无法连接到 API: ${e.message}<br>请确保服务器正在运行: python api/server.py</div>`;
+  }
+}
+
+async function fetchJSON(path) {
+  const r = await fetch(API + path);
+  return r.json();
+}
+
+function updateStats(stats) {
+  document.getElementById('statStrategy').textContent = stats.statistics.strategy;
+  document.getElementById('statProjects').textContent = stats.statistics.projects;
+  document.getElementById('statSystems').textContent = stats.statistics.counting_systems;
+}
+
+// Dashboard
+function renderDashboard(stats, systems, projects, deviations) {
+  const topProjects = projects.projects.slice(0, 5);
+  const topSystems = systems.systems.slice(0, 4);
+  const s = stats.statistics;
+
+  let html = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px;">
+      <div class="card"><div class="card-title">📊 数据库总览</div>
+        <div style="font-size:32px;font-weight:700;color:var(--accent)">${s.total_records}</div>
+        <div style="font-size:12px;color:var(--text2)">总记录数 · ${s.generated_at || '2026-09-08'}</div>
+      </div>
+      <div class="card"><div class="card-title">📖 基本策略</div>
+        <div style="font-size:32px;font-weight:700;color:var(--blue)">${s.strategy}</div>
+        <div style="font-size:12px;color:var(--text2)">条策略 (S17+H17)</div>
+      </div>
+      <div class="card"><div class="card-title">⭐ 开源项目</div>
+        <div style="font-size:32px;font-weight:700;color:var(--gold)">${s.projects}</div>
+        <div style="font-size:12px;color:var(--text2)">个 GitHub 项目</div>
+      </div>
+      <div class="card"><div class="card-title">🧮 算牌系统</div>
+        <div style="font-size:32px;font-weight:700;color:var(--accent)">${s.counting_systems}</div>
+        <div style="font-size:12px;color:var(--text2)">种主流系统</div>
+      </div>
+      <div class="card"><div class="card-title">⚡ 偏差索引</div>
+        <div style="font-size:32px;font-weight:700;color:var(--red)">${s.deviations}</div>
+        <div style="font-size:12px;color:var(--text2)">条偏离策略的调整</div>
+      </div>
+      <div class="card"><div class="card-title">🎲 概率数据</div>
+        <div style="font-size:32px;font-weight:700;color:#c084fc">${s.probabilities}</div>
+        <div style="font-size:12px;color:var(--text2)">条概率记录</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="card">
+        <div class="card-title">⭐ TOP 项目</div>
+        ${topProjects.map(p => `
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;">
+            <span>${p.name}</span>
+            <span style="color:var(--gold)">${'★'.repeat(Math.min(5, Math.ceil(p.stars/40)))} ${p.stars}</span>
+          </div>`).join('')}
+      </div>
+      <div class="card">
+        <div class="card-title">🧮 算牌系统</div>
+        ${topSystems.map(sys => `
+          <div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;">
+            <div style="font-weight:600">${sys.name}</div>
+            <div style="font-size:11px;color:var(--text2)">${sys.description || ''}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="card-title">📖 快速访问</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-sm btn-outline" onclick="navigateTo('strategy')">查看基本策略</button>
+        <button class="btn btn-sm btn-outline" onclick="navigateTo('counting')">算牌系统</button>
+        <button class="btn btn-sm btn-outline" onclick="navigateTo('projects')">开源项目</button>
+        <button class="btn btn-sm btn-outline" onclick="navigateTo('deviations')">偏差索引</button>
+        <button class="btn btn-sm btn-outline" onclick="navigateTo('search')">全局搜索</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('dashboardContent').innerHTML = html;
+}
+
+function navigateTo(page) {
+  const nav = document.querySelector(`.nav-item[data-page="${page}"]`);
+  if (nav) nav.click();
+}
+
+// Strategy
+async function loadStrategy(variant) {
+  if (allStrategies[variant]) {
+    renderStrategy(allStrategies[variant], variant);
+    return;
+  }
+  const apiVariant = variant === 's17' ? 'basic_strategy_s17' : 'basic_strategy_h17';
+  const data = await fetchJSON(`/strategy?variant=${apiVariant}`);
+  allStrategies[variant] = data.strategy;
+  renderStrategy(data.strategy, variant);
+}
+
+function renderStrategy(strategies, variant) {
+  document.getElementById('btnS17').classList.toggle('active', variant === 's17');
+  document.getElementById('btnH17').classList.toggle('active', variant === 'h17');
+
+  // Build hand groups
+  const hands = [...new Set(strategies.map(s => s.hand))].sort((a,b) => {
+    const order = {'17':1,'16':2,'15':3,'14':4,'13':5,'12':6,'11':7,'10':8,'9':9,'8':10,'7':11,'6':12,'5':13,'4':14,'3':15,'2':16,'A':17,'A_A':18,'2_2':19,'3_3':20,'4_4':21,'5_5':22,'6_6':23,'7_7':24,'8_8':25,'9_9':26,'10_10':27,'J_J':28,'Q_Q':29,'K_K':30};
+    return (order[a]||99) - (order[b]||99);
+  });
+
+  const handGroup = document.getElementById('handGroup');
+  handGroup.innerHTML = '<button class="hand-btn active" onclick="filterHand(\'all\')">全部</button>' +
+    hands.map(h => `<button class="hand-btn" onclick="filterHand('${h}')">${h}</button>`).join('');
+
+  window._currentHands = hands;
+  window._currentStrategies = strategies;
+  window._currentVariant = variant;
+  renderStrategyGrid(strategies);
+}
+
+function filterHand(hand) {
+  document.querySelectorAll('.hand-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const filtered = hand === 'all' ? window._currentStrategies : window._currentStrategies.filter(s => s.hand === hand);
+  renderStrategyGrid(filtered);
+}
+
+function renderStrategyGrid(data) {
+  const dealers = ['A','2','3','4','5','6','7','8','9','10'];
+  const grid = document.getElementById('strategyGrid');
+
+  // Group by hand
+  const grouped = {};
+  data.forEach(s => {
+    if (!grouped[s.hand]) grouped[s.hand] = {};
+    grouped[s.hand][s.dealer_card] = s.action.toUpperCase();
+  });
+
+  let html = '';
+  const handOrder = ['A_A','2_2','3_3','4_4','5_5','6_6','7_7','8_8','9_9','10_10','J_J','Q_Q','K_K',
+    '11','10','9','8','7','6','5','4','3','2','A','12','13','14','15','16','17'];
+  for (const hand of handOrder) {
+    if (!grouped[hand]) continue;
+    html += `<div class="strat-row-label">${hand}</div>`;
+    html += `<div class="strat-header" style="grid-column:1/-1;text-align:left;padding-left:8px">vs 庄家:</div>`;
+    dealers.forEach(dc => {
+      const action = grouped[hand][dc] || '-';
+      const cls = actionClass(action);
+      html += `<div class="strat-cell ${cls}" title="${hand} vs ${dc}: ${action}">${action}</div>`;
+    });
+  }
+  grid.innerHTML = html;
+}
+
+function actionClass(a) {
+  if (!a || a === '-') return '';
+  if (a === 'HIT') return 'H';
+  if (a === 'STAND') return 'S';
+  if (a === 'DOUBLE') return 'D';
+  if (a === 'SPLIT') return 'P';
+  if (a === 'SURRENDER') return 'R';
+  return '';
+}
+
+// Counting Systems
+function renderCounting(data) {
+  const values = {
+    'Ace-Five': [1,-1,0,0,0,0,0,0,0,0],
+    'Hi-Lo': [−1,0,0,0,0,0,0,0,0,1],
+  };
+  // Hardcode since JSON may have issues
+  const systems = [
+    { name:'Ace-Five', type:'极简 / Unbalanced', desc:'只跟踪A和5，最简单的系统。A=-1, 5=+1，其余为0。', values:[-1,0,0,0,0,0,0,0,0,1] },
+    { name:'Hi-Lo', type:'流行 / Unbalanced', desc:'最流行的算牌系统。2-6=+1, 7-9=0, 10/A=-1。简单高效。', values:[1,1,1,1,1,0,0,0,0,−1] },
+    { name:'Hi-Opt I', type:'平衡 / Balanced', desc:'比Hi-Lo更精确的双级系统。A=0, 2/3/7=±1, 4/5/6=+1, 8/9=0, 10/J/Q/K/A=-1', values:[0,1,1,0,1,1,0,0,0,−1] },
+    { name:'Hi-Opt II', type:'高精度 / Balanced', desc:'双级平衡系统，精度最高之一。2/7=±1, 3/4/6=+2, 5=+3, 8/9=0, 10/A=-2', values:[−2,1,2,2,3,2,1,0,0,−2] },
+    { name:'KO', type:'不平衡 / Unbalanced', desc:'无需计算真实计数！2-7=+1, 8-9=0, 10/A=-1。剪枝系统，适合初学者。', values:[1,1,1,1,1,1,0,0,0,−1] },
+    { name:'OPP', type:'平衡 / Balanced', desc:'简单平衡系统，易学。A=0, 2/7=+1, 3/4/5/6=+2, 8/9=0, 10/J/Q/K=-1', values:[0,1,2,2,2,2,1,0,0,−1] },
+    { name:'Omega II', type:'高精度 / Balanced', desc:'平衡双级系统。A=0, 2/3/7=+1, 4/5/6=+2, 8/9=0, 10/J/Q/K=-2', values:[−2,1,2,2,2,2,1,0,0,−2] },
+    { name:'Red 7', type:'不平衡 / Unbalanced', desc:'红7为+1，黑7为-1，其余2-6=+1, 8-9=0, 10/A=-1。', values:[1,1,1,1,1,1,1,0,0,−1] },
+    { name:'Zen', type:'高精度 / Balanced', desc:'平衡双级高精度系统。A=0, 2/3=+1, 4/5/6=+2, 7=+1, 8=0, 9=-1, 10/J/Q/K=-2', values:[−2,1,2,2,2,1,0,−1,0,−2] },
+  ];
+
+  document.getElementById('systemGrid').innerHTML = systems.map(sys => `
+    <div class="system-card">
+      <div class="system-name">${sys.name}</div>
+      <div class="system-type">${sys.type}</div>
+      <div class="system-desc">${sys.desc}</div>
+      <div class="system-values">
+        ${['A','2','3','4','5','6','7','8','9','10'].map((c,i) => `
+          <div class="val-badge ${sys.values[i]>0?'pos':sys.values[i]<0?'neg':'zero'}" title="${c}">${sys.values[i]}</div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Projects
+function renderProjects(projs) {
+  document.getElementById('projectGrid').innerHTML = projs.map(p => `
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <div class="project-name">${p.name}</div>
+          <div class="project-lang">${p.language}</div>
+        </div>
+        <div class="project-stars">★ ${p.stars}</div>
+      </div>
+      <div class="project-desc">${p.description}</div>
+      <div class="project-tags">
+        ${(p.tags||'').split(',').filter(Boolean).map(t => `<span class="tag">${t}</span>`).join('')}
+      </div>
+      <a class="project-link" href="${p.url}" target="_blank">→ 查看 GitHub</a>
+    </div>
+  `).join('');
+}
+
+function filterProjects() {
+  const q = document.getElementById('projectSearch').value.toLowerCase();
+  const filtered = allProjects.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    (p.description||'').toLowerCase().includes(q) ||
+    (p.tags||'').toLowerCase().includes(q)
+  );
+  renderProjects(filtered);
+}
+
+// Deviations
+function renderDeviations(data) {
+  const illust = data.filter(d => d.category === 'illustrious_18');
+  const fab = data.filter(d => d.category === 'fab_4');
+
+  const row = d => `<tr>
+    <td><span class="dev-cat ${d.category==='illustrious_18'?'illustrious':'fab'}">${d.category === 'illustrious_18' ? 'Illustrious18' : 'FAB-4'}</span></td>
+    <td>${d.hand}</td>
+    <td><span class="index-badge ${d.index>0?'index-pos':d.index<0?'index-neg':'index-zero'}">${d.index}</span></td>
+    <td>≥ ${d.true_count || d.index}</td>
+    <td>${d.action}</td>
+  </tr>`;
+
+  document.getElementById('illustTable').innerHTML = illust.length ? illust.map(row).join('') : '<tr><td colspan="5">无数据</td></tr>';
+  document.getElementById('fabTable').innerHTML = fab.length ? fab.map(row).join('') : '<tr><td colspan="5">无数据</td></tr>';
+}
+
+// Probabilities
+async function loadProbabilities() {
+  const data = await fetchJSON('/probabilities');
+  const probs = data.probabilities;
+
+  // Card probabilities
+  const cards = probs.filter(p => p.card);
+  // Hand bust probabilities
+  const hands = probs.filter(p => p.hand_total);
+  // Rule variants
+  const variants = probs.filter(p => p.rule_variant);
+  // Blackjack prob
+  const bj = probs.find(p => p.blackjack_probability);
+
+  let html = `
+    <div class="card"><div class="card-title">🃏 单张牌抽出概率</div>
+      <div class="prob-grid">
+        ${cards.map(p => `
+          <div class="prob-card">
+            <div class="prob-card-title">牌 ${p.card}</div>
+            <div class="prob-row"><span class="prob-label">概率</span><span class="prob-value">${(p.probability*100).toFixed(2)}%</span></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="card"><div class="card-title">💥 手牌爆牌概率 (stand后)</div>
+      <div class="prob-grid">
+        ${hands.map(p => `
+          <div class="prob-card">
+            <div class="prob-card-title">手牌 ${p.hand_total}</div>
+            <div class="prob-row"><span class="prob-label">爆牌率</span><span class="prob-value" style="color:${p.bust_probability>0.3?'var(--red)':'var(--accent)'}">${(p.bust_probability*100).toFixed(1)}%</span></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="card"><div class="card-title">🎯 关键概率</div>
+      <div class="prob-grid">
+        ${bj ? `<div class="prob-card"><div class="prob-card-title">Blackjack 概率</div><div class="prob-row"><span class="prob-label">自然21</span><span class="prob-value">${(bj.blackjack_probability*100).toFixed(2)}%</span></div></div>` : ''}
+        <div class="prob-card"><div class="prob-card-title">10点牌占比</div><div class="prob-row"><span class="prob-label">10/J/Q/K</span><span class="prob-value" style="color:var(--gold)">30.77%</span></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">📊 不同规则变体的 House Edge</div>
+      <div class="prob-grid">
+        ${variants.map(p => `
+          <div class="prob-card">
+            <div class="prob-card-title">${p.rule_variant}</div>
+            <div class="prob-row"><span class="prob-label">House Edge</span><span class="prob-value" style="color:${p.bust_probability<0?'var(--accent)':'var(--red)'}">${(p.bust_probability*100).toFixed(2)}%</span></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  document.getElementById('probGrid').innerHTML = html;
+}
+
+// Rules
+async function loadRules() {
+  const data = await fetchJSON('/rules');
+  document.getElementById('rulesList').innerHTML = data.rules.map(r => `
+    <div class="rule-item">
+      <div class="rule-cat">${r.category}</div>
+      <div class="rule-content">
+        <h4>${r.name}</h4>
+        <p>${r.description || '暂无描述'}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// History
+async function loadHistory() {
+  const data = await fetchJSON('/history');
+  const sorted = data.history.sort((a,b) => {
+    const ay = a.year || 0, by = b.year || 0;
+    if (typeof ay === 'number' && typeof by === 'number') return ay - by;
+    return String(a.period||'').localeCompare(String(b.period||''));
+  });
+  document.getElementById('historyTimeline').innerHTML = sorted.map(h => `
+    <div class="timeline-item">
+      <div class="timeline-year">${h.period || h.year || '未知'}</div>
+      <div class="timeline-title">${h.event || h.contributor || '未命名事件'}</div>
+      <div class="timeline-desc">${h.contribution || h.location || ''}</div>
+    </div>
+  `).join('');
+}
+
+// Search
+async function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  const data = await fetchJSON(`/search?q=${encodeURIComponent(q)}`);
+  let html = `<div style="font-size:13px;color:var(--text2);margin-bottom:12px">找到 ${data.total} 条结果</div>`;
+
+  if (data.projects && data.projects.length) {
+    html += `<div class="card"><div class="card-title">⭐ 项目 (${data.projects.length})</div>`;
+    html += data.projects.slice(0,10).map(p => `
+      <div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;justify-content:space-between">
+        <span>${p.name}</span><span style="color:var(--gold)">${p.stars} ★</span>
+      </div>`).join('');
+    html += '</div>';
+  }
+  if (data.systems && data.systems.length) {
+    html += `<div class="card"><div class="card-title">🧮 算牌系统 (${data.systems.length})</div>`;
+    html += data.systems.map(s => `
+      <div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:13px">
+        <strong>${s.name}</strong> — ${s.description||''}
+      </div>`).join('');
+    html += '</div>';
+  }
+  if (data.rules && data.rules.length) {
+    html += `<div class="card"><div class="card-title">📖 规则 (${data.rules.length})</div>`;
+    html += data.rules.map(r => `
+      <div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:13px">
+        <strong>${r.name}</strong> — ${r.description||''}
+      </div>`).join('');
+    html += '</div>';
+  }
+  if (!data.total) html = '<div class="error-msg">未找到相关结果</div>';
+  document.getElementById('searchResults').innerHTML = html;
+}
+
+// Init
+loadAll();
+loadRules();
+loadHistory();
+loadProbabilities();
+loadStrategy('s17');
+</script>
+</body>
+</html>

@@ -40,7 +40,12 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
             elif path == '/rules':
                 response = self.get_rules()
             elif path.startswith('/strategy'):
-                variant = params.get('variant', ['s17'])[0]
+                variant = params.get('variant', ['basic_strategy_s17'])[0]
+                # 兼容短名 s17/h17
+                if variant == 's17':
+                    variant = 'basic_strategy_s17'
+                elif variant == 'h17':
+                    variant = 'basic_strategy_h17'
                 response = self.get_strategy(variant)
             elif path == '/counting-systems':
                 response = self.get_counting_systems()
@@ -211,10 +216,10 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
     def get_deviations(self):
         conn = self.get_conn()
         cur = conn.cursor()
-        cur.execute("SELECT * FROM deviations ORDER BY category, `index` DESC")
+        cur.execute('SELECT * FROM deviations ORDER BY category, "index" DESC')
         rows = [dict(r) for r in cur.fetchall()]
         conn.close()
-        return rows
+        return {"total": len(rows), "deviations": rows}
     
     def log_message(self, format, *args):
         """静默日志"""
