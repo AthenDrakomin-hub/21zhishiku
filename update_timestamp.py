@@ -2,13 +2,11 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-projects_path = Path("data/projects.json")
+projects_path = Path(__file__).parent / "data" / "projects.json"
 if projects_path.exists():
-    with open(projects_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    data['last_updated'] = datetime.utcnow().isoformat() + 'Z'
-    with open(projects_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    data = json.loads(projects_path.read_text(encoding="utf-8"))
+    data["last_updated"] = datetime.utcnow().isoformat() + "Z"
+    projects_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"更新时间戳: {data['last_updated']}")
 else:
     print("projects.json 不存在")
